@@ -24,6 +24,7 @@ const userSchema = new mongoose.Schema(
     },
     avatar: {
       type: String, // cloudinary url
+      required: [true,"avatar is required"]
     },
     role: {
       type: String,

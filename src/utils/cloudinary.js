@@ -1,5 +1,5 @@
 import {v2 as cloudinary} from 'cloudinary';
-
+import fs from 'fs'
 // config
 
 cloudinary.config({ 
@@ -16,8 +16,10 @@ const uploadOnCloudinary = async (imageLocalPath) => {
       // Upload the image
       const result = await cloudinary.uploader.upload(imageLocalPath);
       console.log(result);
+      fs.unlinkSync(imageLocalPath)
       return result;
     } catch (error) {
+      fs.unlinkSync(imageLocalPath)
       console.error(error);
     }
 };
