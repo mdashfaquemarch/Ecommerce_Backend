@@ -71,12 +71,72 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new ApiError(500,"Error while Registering the user");
     }
 
-    res.
+    return res.
     status(201).
     json(new ApiResponse(200,createdUser,"User registered Successfully"));
 })
 
 
+const logInUser = asyncHandler( async (req,res) => {
+
+})
+
+const refreshAccessToken = asyncHandler (async (req,res) => {
+
+})
+
+const getAllUser = asyncHandler (async (req,res) => {
+    const users = await User.find({}).select("-password -refreshToken")
+
+    if(!users) {
+        throw new ApiError(500,"Error while fetching the users")
+    }
+
+    return res.
+    status(200).
+    json(new ApiResponse(200,users,"All users fetched successfully"))
+
+})
+
+
+
+const getUser = asyncHandler (async (req,res) => {
+    const {userId} = req.params;
+    const user = await User.findById(userId).select("-password -refreshToken")
+
+    if(!users) {
+        throw new ApiError(400,"Error while fetching the user or Invalid Id")
+    }
+
+    return res.
+    status(200).
+    json(new ApiResponse(200,user,"user fetched successfully"))
+
+})
+
+const deleteUser = asyncHandler (async (req,res) => {
+    const {userId} = req.params;
+    const user = await User.findById(userId).select("-password -refreshToken")
+
+    if(!users) {
+        throw new ApiError(400,"Error while fetching the user or Invalid Id")
+    }
+     
+     await user.deleteOne()
+
+    return res.
+    status(200).
+    json(new ApiResponse(200,"User deleted successfully"))
+
+})
+
+
+
 export {
     registerUser,
+    logInUser,
+    refreshAccessToken,
+    getAllUser,
+    getUser,
+    deleteUser
 }
