@@ -1,6 +1,6 @@
 import express from "express";
 import {upload} from "../middlewares/multer.middleware.js"
-import {adminOnly} from "../middlewares/auth.middleware..js"
+import {adminOnly} from "../middlewares/auth.middleware.js"
 
 import { getAllUser, registerUser , getUser, deleteUser } from "../controllers/user.controller.js";
 const router  = express.Router();
